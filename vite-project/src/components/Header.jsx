@@ -1,11 +1,13 @@
+import  { Routes, Route, Link } from 'react-router-dom'
+import { Payment } from "./Payment"
 
-
-export const Header = (logo) => {
+export const Header = () => {
   return (
+    <>
     <header className="header center">
       <div className="header__content container">
         <a href="#">
-          <img className="header__logo" src={ logo } alt="logo" />
+          <img className="header__logo" src="/public/img/logo.svg" alt="logo" />
         </a>
         <nav className="header__nav">
           <a href="#" className="header__navlink">
@@ -108,7 +110,7 @@ export const Header = (logo) => {
               </li>
               <li></li>
               <li>
-                <a href="#" className="menu-item">
+                <a href="/payment" className="menu-item">
                   Оплата
                 </a>
               </li>
@@ -117,5 +119,13 @@ export const Header = (logo) => {
         </div>
       </div>
     </header>
+
+
+    <Routes> 
+
+        <Route exact path="/" component={ Payment }/>
+
+    </Routes>
+    </>
   );
 };

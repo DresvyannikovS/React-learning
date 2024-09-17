@@ -1,0 +1,56 @@
+import styled, { createGlobalStyle } from "styled-components";
+
+export const EmptyGlobalStyle = createGlobalStyle`
+.under  {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+
+    &__block    {
+        max-height: 400px;
+    }
+
+    &__img {
+    width: 300px;
+    object-fit: contain;
+    margin-top: 50px;
+}
+
+    &__text   {
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 120%;
+        text-align: center;
+    }
+
+    &__text   {
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 120%;
+        text-align: center;
+    }
+}
+
+@media  (max-width: 600px)     {
+    .under  {
+        padding-top: 70px;
+        padding-bottom: 70px;
+        gap: 20px;
+    
+        &__block    {
+            max-height: 300px;
+        }
+    
+        &__text   {
+            font-size: 30px;
+        }
+    
+        &__text   {
+            font-size: 18px;
+        }
+    }
+}`;

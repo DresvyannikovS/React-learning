@@ -3,16 +3,16 @@ export const LogoutIcon = () => {
     <>
       <a data-select={1} id="showAuthForm" href="#">
         <svg
-          class="header__personalIcon"
+          className="header__personalIcon"
           fill="CurrentColor"
           height="23px"
           width="23px"
           version="1.1"
           id="Layer_1"
           xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
           viewBox="0 0 512 512"
-          xml:space="preserve"
+          xmlSpace="preserve"
         >
           <g>
             <g>

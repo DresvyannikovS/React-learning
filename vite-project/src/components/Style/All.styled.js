@@ -408,7 +408,7 @@ a {
     position: absolute;
     border-radius: 20px;
     min-width: 23px;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: red;

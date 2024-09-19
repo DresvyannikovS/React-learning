@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<svg fill="CurrentColor" height="23px" width="23px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
+<svg fill="CurrentColor" height="23px" width="23px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 512 512" xmlSpace="preserve">
 <g>
 	<g>
 		<path d="M301.697,491.922H90.785c-11.025,0-21.029-9.649-21.029-20.669V39.39c0-11.02,10.005-19.311,21.029-19.311h210.912

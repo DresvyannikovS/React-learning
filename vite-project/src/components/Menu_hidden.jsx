@@ -1,7 +1,7 @@
 export const Menu_hidden = () => {
   return (
     <nav className="menuhidden">
-      <label for="touch">
+      <label htmlFor="touch">
         <span className="span">Категория</span>
       </label>
       <input type="checkbox" id="touch" />

@@ -10,6 +10,7 @@ export const Logout = () => {
     clearUserToken();
     updateToken(null);
     navigate("/");
+    window.location.reload();
   };
 
   const handleClose = () => {
@@ -17,12 +18,12 @@ export const Logout = () => {
   };
 
   return (
-    <div class="blur modal">
-      <div class="modal-content">
+    <div className="blur modal">
+      <div className="modal-content">
         <button
           onClick={handleClose}
           id="close-button"
-          class="close-button blur__close-button"
+          className="close-button blur__close-button"
         >
           <svg
             width="24"
@@ -30,7 +31,7 @@ export const Logout = () => {
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
           >
             <defs />
 
@@ -58,21 +59,21 @@ export const Logout = () => {
           </svg>
         </button>
 
-        <div class="modal-content-slot blur__form">
-          <div class="blur__content">
-            <p class="blur__title blur__title_logout">
+        <div className="modal-content-slot blur__form">
+          <div className="blur__content">
+            <p className="blur__title blur__title_logout">
               Вы уверены что хотите выйти?
             </p>
-            <div class="blur__dialog-button">
+            <div className="blur__dialog-button">
               <button
                 onClick={handleLogout}
-                class="blur__button red-button blur__button_basket logoutButton"
+                className="blur__button red-button blur__button_basket logoutButton"
               >
                 Да
               </button>
               <button
                 onClick={handleClose}
-                class="blur__button red-button blur__button_basket cancelButton"
+                className="blur__button red-button blur__button_basket cancelButton"
               >
                 Нет
               </button>

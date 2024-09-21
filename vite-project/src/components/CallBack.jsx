@@ -1,8 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
 export const CallBack = () => {
+  let navigate = useNavigate();
+
+  const handleClose = () => {
+    navigate("/");
+  }
+  
   return (
     <div className="blur modal">
       <div className="modal-content">
-        <button id="close-button" className="close-button blur__close-button">
+        <button onClick={handleClose} className="close-button blur__close-button">
           <svg
             width="24"
             height="24"

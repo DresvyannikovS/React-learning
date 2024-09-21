@@ -872,7 +872,7 @@ a {
 }
   
   .empty {
-      display: none;
+      display: block;
     
       &__item {
       padding-top: 100px;

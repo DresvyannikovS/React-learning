@@ -10,7 +10,7 @@ export const Main = () => {
               Колбасная продукция
               <br />с доставкой по Крыму
             </h1>
-            <button className="title__button showCallForm">Заказать звонок</button>
+            <button className="title__button showCallForm"><Link to ={"/сallBack"} style={{color: "white"}}>Заказать звонок</Link></button>
             <div>
               <ul className="title__ul">
                 <li className="title__li">Только качественная продукция</li>
@@ -29,7 +29,7 @@ export const Main = () => {
             <br />с доставкой по Крыму
           </h1>
           <button className="title__button showCallForm">
-            <Link to ={"/сallBack"}>Заказать звонок</Link>
+            <Link to ={"/сallBack"} style={{color: "white"}}>Заказать звонок</Link>
             </button>
           <div>
             <ul className="title__ul">

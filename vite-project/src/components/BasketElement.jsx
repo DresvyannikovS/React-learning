@@ -1,4 +1,21 @@
-export const BasketElement = (item) => {
+import api from "../api";
+import { useCounterContext } from "../context/CounterContext";
+import { Calculation } from "./Calculation";
+
+export const BasketElement = ({ item }) => {
+
+  const { updateCounter } = useCounterContext();
+
+    const handleDeleteFromBasket = async () => {
+      const response = await api({
+        route: `/dell_to_basket?product_id=${item.id}`,
+      });
+
+      if (response) {
+        updateCounter();
+      }
+    }
+
   return (
     <>
       `
@@ -12,29 +29,11 @@ export const BasketElement = (item) => {
         <div className="basket__info-container">
           <p className="basket__name">{item.title}</p>
           <div className="basket__priceblock">
-            <div data-index={item.id} className="basket__calc">
-              <button className="basket__button-calc red-button remove">
-                <img
-                  src="/public/img/minus.svg"
-                  alt=""
-                  className="basket__img-calc remove"
-                />
-              </button>
-              <input
-                value={item.count}
-                type="number"
-                className="basket__input"
-              />
-              <button className="basket__button-calc red-button add">
-                <img
-                  src="/public/img/plus.svg"
-                  alt=""
-                  className="basket__img-calc add"
-                />
-              </button>
-            </div>
+            <Calculation id={item.id}/>
+
             <button
               data-index={item.id}
+              onClick={handleDeleteFromBasket}
               className="basket__button-container basket__delete"
             >
               <svg

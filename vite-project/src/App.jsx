@@ -20,6 +20,7 @@ import { getGoods } from "./components/goods";
 import { CounterContext } from "./context/CounterContext";
 import { AboutPage } from "./pages/AboutPage";
 import { CallBack } from "./components/CallBack";
+import { BasketPage } from "./pages/BasketPage";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -60,6 +61,7 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<MainPage />} />
               <Route path="about" element={<AboutPage />} />
+              <Route path="basket" element={<BasketPage />} />
               <Route path="payment" element={<PaymentPage />} />
               <Route path="catalog" element={<CatalogPage />} />
               <Route path="empty" element={<EmptyPage />} />

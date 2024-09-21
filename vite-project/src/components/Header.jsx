@@ -95,7 +95,7 @@ export const Header = () => {
               {!token ? <AuthIcon /> : <LogoutIcon />}
             </div>
             <div className="header__basket-container">
-              <a href="basket.html">
+              <Link to={"/basket"} href="basket.html">
                 <svg
                   className="header__personalIcon"
                   width="21.875000"
@@ -114,7 +114,7 @@ export const Header = () => {
                     fillRule="evenodd"
                   />
                 </svg>
-              </a>
+              </Link>
 
               {isFullBasket && (
                 <div id="basketCounterContainer" className="header__counter">

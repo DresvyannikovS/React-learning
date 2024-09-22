@@ -23,7 +23,7 @@ export const About = () => {
             <h4 className="attainment__secondtitle">лет на рынке</h4>
           </div>
           <div className="attainment__numbers">
-            <h1 className="attainment__title">>500</h1>
+            <h1 className="attainment__title">500</h1>
             <h4 className="attainment__secondtitle">клиентов по всему крыму</h4>
           </div>
         </div>

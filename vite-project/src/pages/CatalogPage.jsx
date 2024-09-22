@@ -6,8 +6,7 @@ export const CatalogPage = () => {
     <>
       <Menu_hidden />
 
-      < Catalog />
-
+      <Catalog />
     </>
   );
 };

@@ -1,27 +1,9 @@
-import { useState } from "react";
 import { BasketElement } from "./BasketElement";
-import { useEffect } from "react";
-import { getGoods } from "./goods";
-import { useCounterContext } from "../context/CounterContext";
+import { useGoodsContext } from "../context/GoodsContext";
+import { formatPrice } from "../utils/basket";
 
 export const Basket = () => {
-  const [goods, setGoods] = useState([]);
-  const [totalSumm, setTotalSumm] = useState(0);
-
-  const { counter } = useCounterContext();
-  useEffect(() => {updateGoods()}, [counter]);
-
-  const updateGoods = async () => {
-    let array = await getGoods();
-    setGoods(array);
-    setTotalSumm(
-      array.reduce((acc, item) => (acc += item.count * item.price), 0)
-    );
-  };
-
-  useEffect(() => {
-    updateGoods();
-  }, []);
+  const { totalSumm, goods } = useGoodsContext();
 
   return (
     <>
@@ -37,7 +19,7 @@ export const Basket = () => {
 
             <div className="basket__summ">
               <p className="basket__price basket__price_right">
-                Итого: <span id="summ">{totalSumm} ₽</span>
+                Итого: <span id="summ">{formatPrice(totalSumm)}</span>
               </p>
             </div>
 

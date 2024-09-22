@@ -1,19 +1,39 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 import { AuthIcon } from "./Icons/AuthIcon";
 import { LogoutIcon } from "./Icons/LogoutIcon";
-import { useCounterContext } from "../context/CounterContext";
-import { useEffect } from "react";
+import { useGoodsContext } from "../context/GoodsContext";
+import { useState } from "react";
+import { Modal } from "./Modal/Modal";
+import { LoginModalContent } from "./LoginModalContent";
+import { LogoutModalContent } from "./LogoutModalContent";
+import { RegistrationModalContent } from "./RegistrationModalContent";
+import { MODALS } from "../constants/modals";
 
 export const Header = () => {
-  let navigate = useNavigate();
   const { token } = useUserContext();
-  const { isFullBasket, counter, updateCounter } = useCounterContext();
+  const { goods } = useGoodsContext();
+  /**
+   * Так как у тебя по сути три модалки - логин, логаут, регистрация
+   * То можно сделать три отдельные модалки и три отдельных тогглера
+   * Это как один из вариантов
+   * Второй вариант - это одна модалка, но с разным контентом
+   */
+  // const loginModalToggler = useToggler()
+  // const logoutModalToggler = useToggler()
+  // const registrationModalToggler = useToggler()
 
-  updateCounter();
+  // Это второй вариант
+  const [modalContentType, setModalContentType] = useState(null);
 
-  const handleOpenModal = () => {
-    navigate(!token ? "/auth" : "/logout");
+  const MODALS_CONTENT_BY_TYPE = {
+    login: (
+      <LoginModalContent
+        toRegistration={() => setModalContentType(MODALS.registration)}
+      />
+    ),
+    logout: <LogoutModalContent />,
+    registration: <RegistrationModalContent />,
   };
 
   return (
@@ -88,7 +108,7 @@ export const Header = () => {
               +7(978) 041-31-41
             </a>
             <div
-              onClick={handleOpenModal}
+              onClick={() => setModalContentType(token ? "logout" : "login")}
               id="personal-container"
               className="header__personal-container"
             >
@@ -116,9 +136,9 @@ export const Header = () => {
                 </svg>
               </Link>
 
-              {isFullBasket && (
+              {goods.length > 0 && (
                 <div id="basketCounterContainer" className="header__counter">
-                  <p className="header__count">{counter}</p>
+                  <p className="header__count">{goods.length}</p>
                 </div>
               )}
             </div>
@@ -179,6 +199,13 @@ export const Header = () => {
           </div>
         </div>
       </header>
+
+      <Modal
+        isOpen={Boolean(modalContentType)}
+        onClose={() => setModalContentType(null)}
+      >
+        {MODALS_CONTENT_BY_TYPE[modalContentType]}
+      </Modal>
     </>
   );
 };

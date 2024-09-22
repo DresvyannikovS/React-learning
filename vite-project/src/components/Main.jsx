@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { useToggler } from "../hooks/useToggler";
+import { CallBackModalContent } from "./CallBackModalContent";
+import { Modal } from "./Modal";
 
 export const Main = () => {
+  const { isOpen, toggle } = useToggler();
+
   return (
     <>
       <section className="title">
@@ -10,12 +14,19 @@ export const Main = () => {
               Колбасная продукция
               <br />с доставкой по Крыму
             </h1>
-            <button className="title__button showCallForm"><Link to ={"/сallBack"} style={{color: "white"}}>Заказать звонок</Link></button>
+            <button
+              onClick={() => toggle(true)}
+              className="title__button showCallForm"
+            >
+              Заказать звонок
+            </button>
             <div>
               <ul className="title__ul">
                 <li className="title__li">Только качественная продукция</li>
                 <li className="title__li">Большой ассортимент</li>
-                <li className="title__li">Постоянное наличие товара на складе</li>
+                <li className="title__li">
+                  Постоянное наличие товара на складе
+                </li>
               </ul>
             </div>
           </div>
@@ -28,9 +39,12 @@ export const Main = () => {
             Колбасная продукция
             <br />с доставкой по Крыму
           </h1>
-          <button className="title__button showCallForm">
-            <Link to ={"/сallBack"} style={{color: "white"}}>Заказать звонок</Link>
-            </button>
+          <button
+            onClick={() => toggle(true)}
+            className="title__button showCallForm"
+          >
+            Заказать звонок
+          </button>
           <div>
             <ul className="title__ul">
               <li className="title__li">Только качественная продукция</li>
@@ -135,6 +149,10 @@ export const Main = () => {
           </div>
         </div>
       </div>
+
+      <Modal isOpen={isOpen} onClose={() => toggle(false)}>
+        <CallBackModalContent />
+      </Modal>
     </>
   );
 };

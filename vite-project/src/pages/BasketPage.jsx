@@ -1,9 +1,9 @@
 import { Basket } from "../components/Basket";
 import { EmptyBasket } from "../components/EmptyBasket";
-import { useCounterContext } from "../context/CounterContext";
+import { useGoodsContext } from "../context/GoodsContext";
 
 export const BasketPage = () => {
-  const { isFullBasket } = useCounterContext();
+  const { goods } = useGoodsContext();
 
-  return <>{isFullBasket ? <Basket /> : <EmptyBasket />}</>;
+  return <>{goods.length > 0 ? <Basket /> : <EmptyBasket />}</>;
 };

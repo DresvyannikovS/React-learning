@@ -5,9 +5,9 @@ import { SlickGlobalStyle } from "../components/Style/Slick.styled";
 export const MainPage = () => {
   return (
     <>
-      < MainGlobalStyle />
-      < SlickGlobalStyle />
-      < Main />
+      <MainGlobalStyle />
+      <SlickGlobalStyle />
+      <Main />
     </>
   );
 };

@@ -1,114 +1,44 @@
-import { useEffect } from "react";
 import { useState } from "react";
-import api from "../api";
-import { getGoods } from "./goods";
-import { useCounterContext } from "../context/CounterContext";
+import { useGoodsContext } from "../context/GoodsContext";
+import {
+  addToBasket,
+  dellToBasket,
+  minusOne,
+  plusOne,
+  updateBasketCount,
+} from "../services/goods";
 
 export const Calculation = ({ id }) => {
-  const { updateCounter } = useCounterContext();
+  const { updateGoods, isProductInBasket, getProductCount } = useGoodsContext();
 
-  const [isOnBasket, setIsOnBasket] = useState(false);
   const [inputValue, setInputValue] = useState(0);
-  const [inputCalcValue, setInputCalcValue] = useState(0);
-
-  const checkGoods = async (e) => {
-    let basketGoods = await getGoods();
-
-    if (basketGoods) {
-      let array = basketGoods.filter((product) => id === product.id);
-      if (array.length > 0) {
-        isOnBasket ? "" : setIsOnBasket(true);
-        setInputValue(array[0].count);
-        setInputCalcValue(array[0].count);
-      } else {
-        setIsOnBasket(false);
-        setInputValue(0);
-      }
-      updateCounter();
-    }
-  };
-
-  useEffect(() => {
-    checkGoods();
-  }, []);
 
   //Редактирование количества в блоке калькуляции
   const handleAddToBasket = async () => {
     if (inputValue === 0) {
-      const response = await api({
-        route: "/add_to_basket",
-        body: {
-          product_id: id,
-          count: 1,
-        },
-        onError: (response) => {
-          if (response.status === 400) {
-            alert("Товар уже в корзине");
-          }
-        },
+      await addToBasket({
+        body: { product_id: id, count: 1 },
+        onSuccess: updateGoods,
       });
-
-      if (response) {
-        checkGoods();
-      }
     } else {
-      let routeString = `/plus_one?product_id=${id}`;
-
-      const response = await api({
-        route: routeString,
-        onError: (response) => {
-          if (response.status === 422) {
-            alert("ошибка");
-          }
-        },
-      });
-
-      if (response) {
-        checkGoods();
-      }
+      await plusOne({ id, onSuccess: updateGoods });
     }
   };
 
   const handleRemoveFromBasket = async () => {
     if (inputValue > 1) {
-      let routeString = `/minus_one?product_id=${id}`;
-
-      const response = await api({
-        route: routeString,
-        onError: (response) => {
-          if (response.status === 422) {
-            alert("ошибка");
-          }
-        },
-      });
-
-      if (response) {
-        checkGoods();
-      }
+      await minusOne({ id, onSuccess: updateGoods });
     } else {
-      const response = await api({
-        route: `/dell_to_basket?product_id=${id}`,
-      });
-
-      if (response) {
-        checkGoods();
-      }
+      await dellToBasket({ id, onSuccess: updateGoods });
     }
   };
 
-  const SendChangeInput = async (e) => {
-    const response = await api({
-      route: `/upd_basket_count?product_id=${id}&quantity=${inputValue}`,
-      onError: (response) => {
-        if (response.status === 422) {
-          alert("ошибка");
-        }
-      },
+  const SendChangeInput = async () => {
+    await updateBasketCount({
+      id,
+      quantity: inputValue,
+      onSuccess: updateGoods,
     });
-
-    if (response) {
-      checkGoods();
-    }
   };
 
   const handleUpdateInput = (e) => {
@@ -116,13 +46,13 @@ export const Calculation = ({ id }) => {
       setInputValue(e.target.value);
       SendChangeInput();
     } else {
-      setInputValue(inputCalcValue);
+      setInputValue(getProductCount(id));
     }
   };
 
   return (
     <>
-      {!isOnBasket ? (
+      {!isProductInBasket ? (
         <button
           data-id={id}
           onClick={handleAddToBasket}

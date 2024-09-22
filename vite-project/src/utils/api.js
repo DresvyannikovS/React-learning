@@ -1,4 +1,4 @@
-import { getUserToken } from "./Storage.js";
+import { getUserToken } from "../Storage";
 
 const BASE_URL = "https://ros-kolbasa.ru/api";
 
@@ -10,17 +10,23 @@ export const getApiError = (response) => {
   return response.detail?.[0]?.msg || "Что-то пошло не так";
 };
 
-export const api = async ({ route, body, onError }) => {
-  const token = getUserToken()
+export const api = async ({ route, body, onError, onSuccess }) => {
+  const token = getUserToken();
 
   return await fetch(`${BASE_URL}${route}`, {
-    headers: { Authentication: `${token}`, Accept: "application/json", "Content-Type": "application/json" },
+    headers: {
+      Authentication: `${token}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
     method: "POST",
     body: JSON.stringify(body),
   }).then(async (response) => {
     const responseToJson = await response.json();
 
     if (response.status === 200) {
+      onSuccess?.(responseToJson);
+
       return responseToJson;
     } else {
       const errorMessage = getApiError(responseToJson);
@@ -33,4 +39,3 @@ export const api = async ({ route, body, onError }) => {
 };
 
 export default api;
-

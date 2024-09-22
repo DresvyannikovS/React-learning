@@ -1,6 +1,6 @@
+import { PRODUCTS } from "../constants/products";
 import { Card } from "./Card";
 import { Menu } from "./Menu";
-import { products } from "../data";
 
 export const Catalog = () => {
   return (
@@ -9,7 +9,7 @@ export const Catalog = () => {
 
       <div className="products__page">
         <div className="products__catalog">
-          {products.map((product) => {
+          {PRODUCTS.map((product) => {
             return <Card key={product.id} item={product} />;
           })}
         </div>

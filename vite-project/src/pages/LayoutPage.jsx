@@ -9,9 +9,9 @@ export const Layout = () => {
     <>
       <Header logo />
 
-        <main>
+      <main>
         <Outlet />
-        </main>
+      </main>
 
       <Footer logo={logo} />
     </>

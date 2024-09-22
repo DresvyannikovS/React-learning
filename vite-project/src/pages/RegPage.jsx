@@ -1,7 +1,1 @@
-import { Registration } from "../components/Registration"
-
-export const RegPage = () => {
-    return (
-        < Registration /> 
-    )
-}
+export const RegPage = () => {};
